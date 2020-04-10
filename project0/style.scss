@@ -1,0 +1,35 @@
+$navbarColor: 006699;
+$fontColor: darkblue;
+
+@media print {
+    .screen-only{
+        display: none;
+    }
+}
+
+div {
+  font-size: 18px;
+  p {
+    color: blue;
+  }
+}
+.name{
+    font-size: 20px;
+}
+#nav1{
+    color: $navbarColor;
+}
+
+#btn1{
+    font-weight: bold;
+}
+
+#a1{
+    font: armenian;
+}
+#inpt1{
+    border-color: $fontColor;
+}
+#p1{
+    font-size: 20px;
+}
