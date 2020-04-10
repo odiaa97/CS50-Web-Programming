@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}CS50W Project 1{% endblock %}
+{% block profile %}{{ username }}{% endblock %}
+{% block main %}
+    </br>
+    {% if length == 0 %}
+    <div class="alert alert-danger" role="alert">
+        Sorry, No books found for "{{ key }}".
+    </div>
+    {% endif %}
+    <ul class="list-group">
+    {% for book in books %}
+        <a href="{{ url_for('get_book', isbn=book.isbn) }}"><li class="list-group-item">{{ book.title }}, {{ book.author }} - {{ book.year }}</li></a>
+    {% endfor %}
+    </ul>
+{% endblock %}

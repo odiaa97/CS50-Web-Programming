@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block title %}CS50W Project 1{% endblock %}
+{% block profile %}{{ username }}{% endblock %}
+{% block main %}
+    </br>
+    <div class="row">
+        <div class="col-sm-8">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row">ISBN:</th>
+                        <td>{{ book.isbn }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Name:</th>
+                        <td>{{ book.title }}</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Author:</th>
+                        <td>{{ book.author }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Publication year:</th>
+                        <td>{{ book.year }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Average rating:</th>
+                        <td>{{ av_rate }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Number of ratings:</th>
+                        <td>{{ number_of_ratings }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </br>
+    </hr>
+    <div class="row">
+        <div class="col-sm-8">
+            {% if not review %}
+            <form action="{{ url_for('get_book', isbn=book.isbn) }}" method="POST">
+                <div class="form-group">
+                    <textarea class="form-control mb-3" name="review" placeholder="Submit a review"></textarea>
+                    <select class="custom-select col-sm-4" name="rating">
+                        <option selected disabled>rating</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                    <button class="btn btn-success">Submit</button>
+                </div>
+            </form>
+            {% else %}
+            <div class="alert alert-success" role="alert">
+                You have already submitted your review.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
