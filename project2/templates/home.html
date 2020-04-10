@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block channels %}
+    {% for channel in channels %}
+        <a class="dropdown-item" href="{{ url_for('change_channel', channel=channel) }}">{{ channel }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block all_channels %}
+    {% for channel in all_channels %}
+        <a class="dropdown-item" href="{{ url_for('join_channel', channel=channel) }}">{{ channel }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block profile %} {{ username }} {% endblock %}
+{% block main %}
+    <div class="container">
+    {% if (channels or all_channels) and channel %}
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <strong>{{ channel }}</strong>
+                            </div>
+                            <div class="col-sm-8"></div>
+                            <div class="col-sm-2">
+                                <a class="btn btn-outline-danger" href="{{ url_for('leave', channel=channel) }}">Leave</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Chat room</h5>
+                        <div class="card-text">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul id="messages">
+                                        {% for cMsg in channelMessages %}
+                                            <li>{{ cMsg }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <input class="form-control" id="msgText" placeholder="Type your message">
+                            </div>
+                            <div class="col-sm-3">
+                                <button class="btn btn-primary" id="sendMsgBtn" style="width: 100%">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% elif channels %}
+        <p style="text-align: center">Choose a channel to chat</p>
+        {% else %}
+        <p style="text-align: center">You don't have any channels.</p>
+    {% endif %}
+    </div>
+{% endblock %}

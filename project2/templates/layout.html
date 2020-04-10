@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <script src="https://use.fontawesome.com/4ea07c5117.js"></script>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- https://favicon.io/emoji-favicons/money-mouth-face/ -->
+  <!-- <link href="/static/favicon.ico" rel="icon"> -->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <title>{% block title %}{% endblock %}</title>
+    <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-light bg-light border">
+      <a class="navbar-brand" href="/home"><span class="red">Project2: Flack</span></a>
+
+      <div class="collapse navbar-collapse" id="navbar">
+          {% if session.user_name %}
+              <ul class="navbar-nav mr-auto mt-2">
+                  <li class="nav-item"><a class="nav-link" id="createChannel" href="{{ url_for('create_new_channel') }}">+Create Channel</a></li>
+                  <li>
+                      <div class="dropdown">
+                          <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Channels
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                {% block channels %}
+                                {% endblock %}
+                          </div>
+                      </div>
+                  </li>&nbsp;&nbsp;
+                  <li>
+                      <div class="dropdown">
+                          <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Join a channel
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                {% block all_channels %}
+                                {% endblock %}
+                          </div>
+                    </div>
+                  </li>
+              </ul>
+              <ul class="navbar-nav ml-auto mt-2">
+                  <li class="nav-item"><a class="nav-link" id="user_name" href="/profile" style="color: blue">{% block profile%}{% endblock %}</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
+              </ul>
+          {% else %}
+              <ul class="navbar-nav ml-auto mt-2">
+                <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+              </ul>
+          {% endif %}
+      </div>
+  </nav>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          {% for category, message in messages %}
+              {% if category == "danger" %}
+                  <div class= "text-center alert alert-{{ category }}">&#10539; {{ message }}</div>
+              {% endif %}
+              {% if category == "success" %}
+                  <div class= "text-center alert alert-{{ category }}">&#10004; {{ message }}</div>
+              {% endif %}
+          {% endfor %}
+      {% endif %}
+  {% endwith %}
+
+  <div class="container p-5">
+        {% if session.user_id %}
+        {% block search %}
+            <div class="md-form mt-0">
+            <form action="/search" method="POST">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="text" name="key" placeholder="Search" aria-label="Search">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary"> <i class="fa fa-search"></i> Search</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        {% endblock %}
+        {% endif %}
+        {% block main %}{% endblock %}
+  </div>
+          <footer class="small card-footer text-center text-muted alert alert-primary">
+              Made with  <i class="fa fa-heart"></i> by <a target="_blank" href="https://www.linkedin.com/in/odiaa97">Omar Diaa</a>.
+          </footer>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>

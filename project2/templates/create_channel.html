@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %} Create channel {% endblock %}
+
+{% block channels %}
+    {% for channel in channels %}
+        <a class="dropdown-item" href="{{ url_for('change_channel', channel=channel) }}">{{ channel }}</a>
+    {% endfor %}
+{% endblock %}
+
+{% block profile %} {{ username }} {% endblock %}
+{% block main %}
+    <div class="container">
+        <form action="{{ url_for('create_new_channel') }}" method="POST">
+            <div class="row">
+                <div class="col-sm-4">
+                    <input class="form-control" name="channelId" placeholder="Channel's ID">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success">Create</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
