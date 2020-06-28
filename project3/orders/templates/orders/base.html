@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block head %}{% endblock %}</title>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Pizza Restaurant">
+    <meta name="author" content="A.K.">
+
+    <title>Pizza Restaurant</title>
+    <link rel="shortcut icon"  type="image/jpg" href="../../static/assets/logo.jpg"/>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Custom Fonts -->
+
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../static/css/style.css" type="text/css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+
+</head>
+</head>
+<body id="myPage"  data-spy="scroll" data-target=".navbar" data-offset="60">
+    <nav class="navbar navbar-expand-md bg-trans navbar-dark fixed-top">
+            <a class="navbar-brand mr-auto" href="{% url 'index' %}"><img src="../../static/assets/logo.jpg" height="30" width="41" style="  border-radius: 50%;"></a>
+        <a class="navbar-brand" href="/">Pizza Restaurant</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                        <a class="nav-link" href="#menu">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#service">Service</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                 <li class="nav-item">
+                    <a class="nav-link" href="{% url "order" %}">Order Now</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-item" href="{% url "logout" %}">{{ username }}, Logout</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <br><br><br>
+{% block body %}
+{% endblock %}
+</body>
+
+</html>

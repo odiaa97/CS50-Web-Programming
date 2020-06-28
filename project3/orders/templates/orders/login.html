@@ -1,0 +1,27 @@
+{% extends "orders/base.html" %}
+
+{% block head %}Login{% endblock %}
+
+{% block body %}
+     <div class="mt-5 mb-1">
+            {% if category == "danger" %}
+              <div class= "text-center alert alert-{{ category }}">&#10539; {{ message }}</div>
+            {% endif %}
+            {% if category == "success" %}
+              <div class= "text-center alert alert-{{ category }}">&#10004; {{ message }}</div>
+            {% endif %}
+        </div>
+    <div class="container" style="margin: 100px 0px 0px 550px;">
+    <div class="row">
+        <form action="{% url 'login' %}", method="post">
+            {% csrf_token %}
+            <input class="form-control mb-1" type="text" placeholder="Username" name="username">
+            <input class="form-control" type="password" placeholder="Password" name="password">
+            <button class="btn btn-success btn-block" class="form-control mt-2" type="submit">Login</button>
+        </form>
+    </div>
+    <div class="row">
+        <a href="{% url "register_view" %}">Don't have an account? Register now.</a>
+    </div>
+</div>
+{% endblock %}

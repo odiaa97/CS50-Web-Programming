@@ -1,0 +1,74 @@
+{% extends "orders/base.html" %}
+
+{% block head %}Shopping Cart{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+    {% if pizza.count != 0 %}
+        <div class="row">
+            <h3>Pizza</h3>
+        </div>
+        <ul class="list-group">
+            {% for item in pizza %}
+                    <li class="list-group-item list-group-item-action">{{ item.name }}, {{ item.price }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if drinks.count != 0 %}
+        <br/>
+        <div class="row">
+            <h3>Drinks</h3>
+        </div>
+        <ul class="list-group">
+            {% for item in drinks %}
+                    <li class="list-group-item list-group-item-action">{{ item.name }}, {{ item.price }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if salad.count != 0 %}
+        <br/>
+        <div class="row">
+            <h3>Salad</h3>
+        </div>
+        <ul class="list-group">
+            {% for item in salad %}
+                    <li class="list-group-item list-group-item-action">{{ item.name }}, {{ item.price }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    {% if hot_drinks.count != 0 %}
+        <br/>
+        <div class="row">
+            <h3>Hot Drinks</h3>
+        </div>
+        <ul class="list-group">
+            {% for item in hot_drinks %}
+                    <li class="list-group-item list-group-item-action">{{ item.name }}, {{ item.price }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if dessert.count != 0 %}
+        <br/>
+        <div class="row">
+            <h3>Dessert</h3>
+        </div>
+        <ul class="list-group">
+            {% for item in dessert %}
+                    <li class="list-group-item list-group-item-action">{{ item.name }}, {{ item.price }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if pizza.count > 0 or hot_drinks.count > 0 %}
+        <form action="{% url 'remove' %}">
+            {% csrf_token %}
+            <button class="btn btn-success" type="submit">Order</button>
+        </form>
+    {% endif %}
+    </div>
+{% endblock %}
