@@ -1,0 +1,1 @@
+Javascript is a programming language that can add dynamic actions to HTML page.

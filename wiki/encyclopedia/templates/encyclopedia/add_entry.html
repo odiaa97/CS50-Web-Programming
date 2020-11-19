@@ -1,0 +1,30 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    
+    <center>
+        <form method="POST" action = "{% url 'encyclopedia:add_entry'  %}"%>
+            {% csrf_token %} 
+            <div class='container'>
+                <div class='row'>
+                    <div class='col-sm-10'>
+                        <h1>Add new entry</h1>
+                        <input name='title' class='form-control col-sm-8' placeholder='Title' type="text"></br>
+                        <textarea name='content' class='form-control' placeholder='Content' style="height:200px;width:600px;"></textarea>
+                    </div>
+                    </div>
+                </div></br>
+                <div class='row'>
+                    <div class='col-sm-4'></div>
+                    <button type='submit' class='btn btn-primary mr-2'>Add</button>
+                    <button class='btn btn-danger'>Cancel</button>
+                </div>
+            </div>
+        </form>
+    </center>
+
+{% endblock %}
