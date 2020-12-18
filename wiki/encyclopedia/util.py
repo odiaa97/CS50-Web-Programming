@@ -47,3 +47,12 @@ def delete_entry(title):
         default_storage.delete(filename)
     except FileNotFoundError:
         return "File not found!"
+
+def search(query):
+    """
+    Returns a list of all names of encyclopedia entries containing the search query
+    """
+    notFound = ["-1"]
+    _, filenames = default_storage.listdir("entries")
+    return list(sorted(re.sub(r"\.md$", "", filename)
+                for filename in filenames if filename.endswith(".md") and query in filename.lower()) or notFound)

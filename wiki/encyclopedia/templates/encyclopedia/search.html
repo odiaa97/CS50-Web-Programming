@@ -1,0 +1,17 @@
+{% extends "encyclopedia/layout.html" %}
+{% block nav %} Search {% endblock %}
+{% block body %}
+<h1>Related Pages</h1>
+<p>search result for {{q}}</p>
+<ul>
+    {% for entry in entries %}
+            {% if entry == '-1' %}
+                <p>Page not found!</p>
+            {% else %}
+                <li><a href="{% url 'encyclopedia:TITLE' entry %}">{{ entry }}<a/></li>
+            {% endif %}
+    {% endfor %}
+
+</ul>
+
+{% endblock %}

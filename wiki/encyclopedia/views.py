@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django import forms
+from markdown2 import markdown
 from . import util
 import random
 
@@ -36,6 +37,24 @@ def random_entry(request):
     entry = util.get_entry(title)
     return render(request, f"encyclopedia/entry.html",{
         "entry": entry,
+        "title": title
+    })
+
+
+def search(request):
+    q = request.GET.get('q')
+    if q in util.list_entries():
+        return redirect('encyclopedia:entry', title=q)
+    return render(request, "encyclopedia/search.html", {"entries": util.search(q), "q": q})
+
+
+def entry(request, title):
+    entry = util.get_entry(title)
+    if entry == None:
+        entry = "## Page was not found"
+    entry = markdown(entry)
+    return render(request, f"encyclopedia/entry.html", {
+        "entry": entry, 
         "title": title
     })
     
